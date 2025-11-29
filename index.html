@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PRTS TACTICAL ENGINE</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              tactical: {
+                bg: 'rgb(var(--tactical-bg) / <alpha-value>)',
+                panel: 'rgb(var(--tactical-panel) / <alpha-value>)',
+                surface: 'rgb(var(--tactical-surface) / <alpha-value>)',
+                yellow: 'rgb(var(--tactical-yellow) / <alpha-value>)',
+                cyan: 'rgb(var(--tactical-cyan) / <alpha-value>)',
+                red: 'rgb(var(--tactical-red) / <alpha-value>)',
+                structure: 'rgb(var(--tactical-structure) / <alpha-value>)',
+                dim: 'rgb(var(--tactical-dim) / <alpha-value>)',
+                text: 'rgb(var(--tactical-text) / <alpha-value>)'
+              }
+            },
+            fontFamily: {
+              sans: ['Oswald', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
+            },
+            backgroundImage: {
+               'scanlines': 'linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06))',
+            },
+            animation: {
+              'spin-slow': 'spin 20s linear infinite',
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      :root {
+        /* DARK MODE (Default) */
+        --tactical-bg: 5 5 5;          /* #050505 */
+        --tactical-panel: 18 18 18;    /* #121212 */
+        --tactical-surface: 30 30 30;  /* #1E1E1E */
+        --tactical-structure: 51 51 51;/* #333333 */
+        --tactical-dim: 74 74 74;      /* #4A4A4A */
+        --tactical-text: 224 224 224;  /* #E0E0E0 */
+        
+        --tactical-yellow: 255 208 0;  /* #FFD000 */
+        --tactical-cyan: 0 240 255;    /* #00F0FF */
+        --tactical-red: 255 42 42;     /* #FF2A2A */
+      }
+
+      .light-mode {
+        /* LIGHT MODE (Rhodes Island White) */
+        --tactical-bg: 242 242 242;    /* #F2F2F2 */
+        --tactical-panel: 255 255 255; /* #FFFFFF */
+        --tactical-surface: 229 229 229; /* #E5E5E5 */
+        --tactical-structure: 189 189 189; /* #BDBDBD */
+        --tactical-dim: 120 120 120;   /* #787878 */
+        --tactical-text: 20 20 20;     /* #141414 */
+        
+        --tactical-yellow: 230 140 0;  /* #E68C00 - Darker Orange/Gold for visibility on white */
+        --tactical-cyan: 0 140 150;    /* #008C96 - Teal for visibility on white */
+        --tactical-red: 220 20 20;     /* #DC1414 - Darker red */
+      }
+
+      body {
+        background-color: rgb(var(--tactical-bg));
+        color: rgb(var(--tactical-text));
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      
+      /* Tech-wear Striped Patterns */
+      .bg-stripes-dark {
+        background-image: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 5px,
+          rgba(var(--tactical-dim), 0.1) 5px,
+          rgba(var(--tactical-dim), 0.1) 10px
+        );
+      }
+      
+      .bg-stripes-warning {
+        background-image: repeating-linear-gradient(
+          -45deg,
+          rgb(var(--tactical-yellow)),
+          rgb(var(--tactical-yellow)) 10px,
+          rgb(var(--tactical-panel)) 10px,
+          rgb(var(--tactical-panel)) 20px
+        );
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgb(var(--tactical-bg));
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgb(var(--tactical-structure));
+        border-radius: 0;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgb(var(--tactical-yellow));
+      }
+
+      ::selection {
+        background: rgb(var(--tactical-cyan));
+        color: rgb(var(--tactical-bg));
+      }
+
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      
+      /* Glitch Animation Keyframes */
+      @keyframes glitch-skew {
+        0% { transform: skew(0deg); }
+        20% { transform: skew(-2deg); }
+        40% { transform: skew(2deg); }
+        60% { transform: skew(-1deg); }
+        80% { transform: skew(1deg); }
+        100% { transform: skew(0deg); }
+      }
+      .animate-glitch {
+        animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
